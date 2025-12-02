@@ -65,11 +65,7 @@ Berikut adalah struktur database yang menghubungkan User, Barang, dan Riwayat Tr
 
 ```mermaid
 erDiagram
-    users ||--o{ riwayats : "mencatat (1:N)"
-    barangs ||--o{ riwayats : "memiliki (1:N)"
-    
-   erDiagram
-    %% --- Tabel Utama Proyek ---
+    %% --- 1. Tabel Utama Proyek ---
     users {
         bigint id PK
         varchar name
@@ -113,7 +109,7 @@ erDiagram
         timestamp updated_at
     }
 
-    %% --- Tabel Bawaan Laravel (Pelengkap biar mirip contoh) ---
+    %% --- 2. Tabel Bawaan Laravel ---
     migrations {
         int id PK
         varchar migration
@@ -148,9 +144,6 @@ erDiagram
         timestamp created_at
     }
 
-    %% --- Relasi ---
-    users ||--o{ riwayats : "1 User mencatat Banyak Riwayat"
-    barangs ||--o{ riwayats : "1 Barang memiliki Banyak Riwayat"
-        text keterangan
-        timestamp created_at
-    }
+    %% --- 3. Definisi Relasi ---
+    users ||--o{ riwayats : "mencatat"
+    barangs ||--o{ riwayats : "memiliki"
