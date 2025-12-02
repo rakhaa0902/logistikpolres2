@@ -109,40 +109,6 @@ erDiagram
         timestamp updated_at
     }
 
-    %% --- 2. Tabel Bawaan Laravel ---
-    migrations {
-        int id PK
-        varchar migration
-        int batch
-    }
-
-    failed_jobs {
-        bigint id PK
-        varchar uuid
-        text connection
-        text queue
-        longtext payload
-        longtext exception
-        timestamp failed_at
-    }
-
-    personal_access_tokens {
-        bigint id PK
-        varchar tokenable_type
-        bigint tokenable_id
-        varchar name
-        varchar token
-        text abilities
-        timestamp last_used_at
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    password_reset_tokens {
-        varchar email PK
-        varchar token
-        timestamp created_at
-    }
-
+   
    --
     users ||--o{ riwayats : "m
