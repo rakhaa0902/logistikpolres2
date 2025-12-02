@@ -94,3 +94,35 @@ erDiagram
         text keterangan
         timestamp created_at
     }
+classDiagram
+    %% DEFINISI CLASS
+    class User {
+        +id: int
+        +name: string
+        +email: string
+        +role: enum
+        +riwayats() HasMany
+    }
+
+    class Barang {
+        +id: int
+        +kode_barang: string
+        +nama_barang: string
+        +jumlah: int
+        +riwayats() HasMany
+    }
+
+    class Riwayat {
+        +id: int
+        +user_id: int
+        +barang_id: int
+        +jenis_transaksi: enum
+        +jumlah: int
+        +user() BelongsTo
+        +barang() BelongsTo
+    }
+
+    %% HUBUNGAN ANTAR CLASS
+    User "1" --> "*" Riwayat : HasMany
+    Barang "1" --> "*" Riwayat : HasMany
+    }
