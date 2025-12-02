@@ -147,3 +147,32 @@ erDiagram
     %% --- Relasi ---
     users ||--o{ riwayats : "1 User mencatat Banyak Riwayat"
     barangs ||--o{ riwayats : "1 Barang memiliki Banyak Riwayat"
+## 🔷 Use Case Diagram
+
+Berikut adalah alur interaksi aktor dengan sistem:
+
+```mermaid
+graph LR
+    %% --- Styling Warna biar mirip gambar ---
+    classDef blueFill fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:black;
+    classDef greenFill fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:black;
+    classDef orangeFill fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:black;
+    classDef actorStyle fill:#ffffff,stroke:#333,stroke-width:2px,color:black;
+
+    %% --- Aktor ---
+    User((User)):::actorStyle
+    Admin((Admin)):::actorStyle
+
+    %% --- Sistem Boundary ---
+    subgraph Sistem_Logistik_Polres [Sistem Logistik Polres]
+        direction TB
+        
+        %% Use Cases untuk User (Biru)
+        UC_Buat([Membuat Logistik]):::blueFill
+        UC_Hapus([Menghapus Logistik]):::blueFill
+        
+        %% Use Case Tengah (Oranye - Shared)
+        UC_Lihat([Melihat Logistik]):::orangeFill
+        
+        %% Use Cases untuk Admin (Hijau)
+        UC_Setuju([Menyetujui
