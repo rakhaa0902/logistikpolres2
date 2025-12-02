@@ -147,3 +147,36 @@ erDiagram
     %% --- 3. Definisi Relasi ---
     users ||--o{ riwayats : "mencatat"
     barangs ||--o{ riwayats : "memiliki"
+    ## 🔷 UML Diagram
+*(Diagram UML akan muncul otomatis di sini karena menggunakan kode Mermaid di bawah)*
+
+```mermaid
+classDiagram
+    class User {
+        +id: int
+        +name: string
+        +email: string
+        +role: enum
+        +riwayats() HasMany
+    }
+
+    class Barang {
+        +id: int
+        +kode_barang: string
+        +nama_barang: string
+        +jumlah: int
+        +riwayats() HasMany
+    }
+
+    class Riwayat {
+        +id: int
+        +user_id: int
+        +barang_id: int
+        +jenis_transaksi: enum
+        +jumlah: int
+        +user() BelongsTo
+        +barang() BelongsTo
+    }
+
+    User "1" --> "*" Riwayat : HasMany
+    Barang "1" --> "*" Riwayat : HasMany
