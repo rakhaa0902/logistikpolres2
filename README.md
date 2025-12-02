@@ -68,29 +68,89 @@ erDiagram
     users ||--o{ riwayats : "mencatat (1:N)"
     barangs ||--o{ riwayats : "memiliki (1:N)"
     
+   erDiagram
+    %% --- Tabel Utama Proyek ---
     users {
         bigint id PK
         varchar name
-        varchar email UK
+        varchar email
+        timestamp email_verified_at
+        varchar password
+        varchar remember_token
         enum role "admin, petugas"
+        timestamp created_at
+        timestamp updated_at
     }
 
     barangs {
         bigint id PK
-        varchar kode_barang UK
+        varchar kode_barang
         varchar nama_barang
         varchar kategori
         int jumlah
         varchar satuan
+        varchar kondisi
         varchar gambar
+        timestamp created_at
+        timestamp updated_at
     }
 
     riwayats {
         bigint id PK
         bigint barang_id FK
         bigint user_id FK
-        enum jenis_transaksi "masuk, keluar"
+        enum jenis_transaksi
         int jumlah
+        text keterangan
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    kategoris {
+        bigint id PK
+        varchar nama_kategori
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    %% --- Tabel Bawaan Laravel (Pelengkap biar mirip contoh) ---
+    migrations {
+        int id PK
+        varchar migration
+        int batch
+    }
+
+    failed_jobs {
+        bigint id PK
+        varchar uuid
+        text connection
+        text queue
+        longtext payload
+        longtext exception
+        timestamp failed_at
+    }
+
+    personal_access_tokens {
+        bigint id PK
+        varchar tokenable_type
+        bigint tokenable_id
+        varchar name
+        varchar token
+        text abilities
+        timestamp last_used_at
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    password_reset_tokens {
+        varchar email PK
+        varchar token
+        timestamp created_at
+    }
+
+    %% --- Relasi ---
+    users ||--o{ riwayats : "1 User mencatat Banyak Riwayat"
+    barangs ||--o{ riwayats : "1 Barang memiliki Banyak Riwayat"
         text keterangan
         timestamp created_at
     }
