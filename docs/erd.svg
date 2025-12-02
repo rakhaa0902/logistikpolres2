@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333" />
+    </marker>
+    <style>
+      .box { fill:#fff; stroke:#333; stroke-width:1.5 }
+      .title { font: bold 14px/18px sans-serif; fill:#111 }
+      .field { font: 12px/16px monospace; fill:#222 }
+      .pk { font-weight:700 }
+      .fk { font-style:italic }
+      .note { font: 12px sans-serif; fill:#555 }
+    </style>
+  </defs>
+
+  <!-- Users -->
+  <rect class="box" x="40" y="30" width="260" height="120" rx="6"/>
+  <text class="title" x="60" y="52">users</text>
+  <text class="field pk" x="60" y="74">id (PK) : BIGINT UNSIGNED</text>
+  <text class="field" x="60" y="94">name : VARCHAR(255)</text>
+  <text class="field" x="60" y="110">email : VARCHAR(255) UNIQUE</text>
+  <text class="field" x="60" y="126">role : ENUM('admin','petugas')</text>
+
+  <!-- Barangs -->
+  <rect class="box" x="360" y="30" width="300" height="160" rx="6"/>
+  <text class="title" x="380" y="52">barangs</text>
+  <text class="field pk" x="380" y="74">id (PK) : BIGINT UNSIGNED</text>
+  <text class="field" x="380" y="94">kode_barang : VARCHAR(255) UNIQUE</text>
+  <text class="field" x="380" y="110">nama_barang : VARCHAR(255)</text>
+  <text class="field" x="380" y="126">kategori : VARCHAR(255) (text)</text>
+  <text class="field" x="380" y="142">jumlah : INT</text>
+  <text class="field" x="380" y="158">gambar : VARCHAR(255) NULLABLE</text>
+
+  <!-- Kategoris -->
+  <rect class="box" x="700" y="30" width="240" height="96" rx="6"/>
+  <text class="title" x="720" y="52">kategoris</text>
+  <text class="field pk" x="720" y="74">id (PK) : BIGINT UNSIGNED</text>
+  <text class="field" x="720" y="94">nama_kategori : VARCHAR(255)</text>
+
+  <!-- Riwayats -->
+  <rect class="box" x="240" y="240" width="520" height="160" rx="6"/>
+  <text class="title" x="260" y="262">riwayats</text>
+  <text class="field pk" x="260" y="284">id (PK) : BIGINT UNSIGNED</text>
+  <text class="field fk" x="260" y="304">barang_id (FK) : BIGINT UNSIGNED → barangs.id</text>
+  <text class="field fk" x="260" y="322">user_id  (FK) : BIGINT UNSIGNED → users.id</text>
+  <text class="field" x="260" y="340">jenis_transaksi : ENUM('masuk','keluar')</text>
+  <text class="field" x="260" y="358">jumlah : INT</text>
+
+  <!-- Arrows: riwayats -> users -->
+  <line x1="260" y1="300" x2="140" y2="120" stroke="#333" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text class="note" x="160" y="200">N — 1</text>
+
+  <!-- Arrows: riwayats -> barangs -->
+  <line x1="520" y1="300" x2="520" y2="180" stroke="#333" stroke-width="1.6" marker-end="url(#arrow)" />
+  <text class="note" x="500" y="220">N — 1</text>
+
+  <!-- Note about kategori relation -->
+  <text class="note" x="60" y="470">Catatan: `barangs.kategori` saat ini menyimpan nama kategori sebagai teks. Untuk integritas referensial, pertimbangkan menambah `kategori_id` FK ke `kategoris`.</text>
+
+</svg>
